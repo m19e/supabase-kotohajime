@@ -10,7 +10,7 @@
     "sb": "start-storybook -p 6006",
     "build-sb": "build-storybook",
     "sd-gen": "scaffdog generate",
-    "gen": "graphql-codegen --require dotenv/config --config codegen.ts dotenv_config_path=.env.local"
+    "generate": "graphql-codegen --require dotenv/config --config codegen.ts dotenv_config_path=.env.local"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.2.3",
