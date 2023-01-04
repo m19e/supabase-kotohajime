@@ -1,11 +1,12 @@
 import { createClient } from "@supabase/supabase-js"
+import { gql } from "urql"
 
 export const SUPABASE_URL = process.env.NEXT_LOCAL_SUPABASE_URL!
 export const SUPABASE_ANON_KEY = process.env.NEXT_LOCAL_SUPABASE_ANON_KEY!
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
-export const ALL_TASKS = /* GraphQL */ `
+export const ALL_TASKS = /* GraphQL */ gql(`
   query allTasks($orderBy: [tasksOrderBy!]) {
     tasksCollection(orderBy: $orderBy) {
       edges {
@@ -17,9 +18,9 @@ export const ALL_TASKS = /* GraphQL */ `
       }
     }
   }
-`
+`)
 
-export const INSERT_TASKS = /* GraphQL */ `
+export const INSERT_TASKS = /* GraphQL */ gql(`
   mutation insertTasks($objects: [tasksInsertInput!]!) {
     insertIntotasksCollection(objects: $objects) {
       records {
@@ -27,9 +28,9 @@ export const INSERT_TASKS = /* GraphQL */ `
       }
     }
   }
-`
+`)
 
-export const UPDATE_TASKS = /* GraphQL */ `
+export const UPDATE_TASKS = /* GraphQL */ gql(`
   mutation updateTasks($set: tasksUpdateInput!, $filter: tasksFilter) {
     updatetasksCollection(set: $set, filter: $filter) {
       records {
@@ -37,4 +38,4 @@ export const UPDATE_TASKS = /* GraphQL */ `
       }
     }
   }
-`
+`)
