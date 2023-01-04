@@ -9,7 +9,8 @@
     "prepare": "husky install",
     "sb": "start-storybook -p 6006",
     "build-sb": "build-storybook",
-    "sd-gen": "scaffdog generate"
+    "sd-gen": "scaffdog generate",
+    "gen": "graphql-codegen --require dotenv/config --config codegen.ts dotenv_config_path=.env.local"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.2.3",
@@ -24,6 +25,9 @@
     "@babel/core": "^7.16.12",
     "@graphql-codegen/cli": "^2.16.2",
     "@graphql-codegen/client-preset": "^1.2.4",
+    "@graphql-codegen/typescript": "^2.8.6",
+    "@graphql-codegen/typescript-operations": "^2.5.11",
+    "@graphql-codegen/typescript-urql": "^3.7.3",
     "@storybook/addon-actions": "^6.4.19",
     "@storybook/addon-console": "^1.2.3",
     "@storybook/addon-essentials": "^6.4.15",
@@ -45,6 +49,7 @@
     "eslint-plugin-storybook": "^0.5.6",
     "eslint-plugin-tailwindcss": "^3.3.6",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "graphql": "^16.6.0",
     "husky": "^7.0.4",
     "lint-staged": ">=10",
     "postcss": "^8.4.5",
