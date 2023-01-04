@@ -1,5 +1,5 @@
 import type { CodegenConfig } from "@graphql-codegen/cli"
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from "./src//consts"
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from "./src/consts"
 
 const config: CodegenConfig = {
   schema: `${SUPABASE_URL}/graphql/v1?apikey=${SUPABASE_ANON_KEY}`,
