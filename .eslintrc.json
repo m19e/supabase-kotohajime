@@ -75,6 +75,11 @@
             "position": "before"
           },
           {
+            "pattern": "@graphql-codegen/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
             "pattern": "@/consts",
             "group": "internal",
             "position": "before"
