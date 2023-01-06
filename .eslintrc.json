@@ -75,6 +75,11 @@
             "position": "before"
           },
           {
+            "pattern": "urql",
+            "group": "internal",
+            "position": "before"
+          },
+          {
             "pattern": "@graphql-codegen/**",
             "group": "internal",
             "position": "before"
