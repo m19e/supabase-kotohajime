@@ -85,6 +85,11 @@
             "position": "before"
           },
           {
+            "pattern": "@supabase/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
             "pattern": "@graphql-codegen/**",
             "group": "internal",
             "position": "before"
