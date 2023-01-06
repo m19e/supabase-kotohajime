@@ -1,13 +1,17 @@
-import type { NextPage, GetServerSideProps } from "next"
+import type { NextPage } from "next"
+import Head from "next/head"
 
-const Page: NextPage = () => {
-  return null
+import { Home } from "@/components/templates/Home"
+
+const HomePage: NextPage = () => {
+  return (
+    <>
+      <Head>
+        <title>Supabase pg_graphql Example</title>
+      </Head>
+      <Home />
+    </>
+  )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  return {
-    props: {},
-  }
-}
-
-export default Page
+export default HomePage
