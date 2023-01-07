@@ -7,6 +7,10 @@ const config: CodegenConfig = {
   //   documents: ["**/*.tsx", "**/*.ts"],
   generates: {
     "./src/gql/index.tsx": {
+      config: {
+        withHooks: true,
+        withComponent: true,
+      },
       plugins: ["typescript", "typescript-operations", "typescript-urql"],
     },
   },
