@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import type { FormEventHandler } from "react"
 import type { Session } from "@supabase/supabase-js"
 
 import { supabase } from "@/consts"
@@ -50,5 +51,36 @@ const TodoList = () => {
 }
 
 const LoginForm = () => {
-  return null
+  const handleSendMagicLink: FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault()
+    const { email } = Object.fromEntries(new FormData(e.currentTarget))
+    if (typeof email !== "string") return
+    const { error } = await supabase.auth.signInWithOtp({ email })
+    if (error) {
+      console.error(error)
+      alert(error.message)
+    } else {
+      alert("Check your email inbox")
+    }
+  }
+
+  return (
+    <form
+      className="flex flex-col justify-center px-4 space-y-2 max-w-md h-full"
+      onSubmit={handleSendMagicLink}
+    >
+      <input
+        className="text-white bg-black border-green-300 input "
+        type="email"
+        name="email"
+        placeholder="Email"
+      />
+      <button
+        className="text-lg text-black normal-case bg-green-400 btn"
+        type="submit"
+      >
+        Send Magic Link
+      </button>
+    </form>
+  )
 }
