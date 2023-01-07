@@ -52,7 +52,7 @@ const AppHeader = ({ isSignedIn }: { isSignedIn: boolean }) => {
       <div className="navbar-end">
         {isSignedIn && (
           <button
-            className="text-white btn"
+            className="text-white normal-case btn"
             onClick={() => supabase.auth.signOut()}
           >
             Sign Out
