@@ -31,8 +31,22 @@ export const Home = () => {
 
   return (
     <div className="flex flex-col h-screen bg-black">
-      <main className="grow mx-auto max-w-4xl min-h-0 text-white"></main>
+      <AppHeader isSignedIn={isSignedIn} />
+      <main className="grow mx-auto max-w-4xl min-h-0 text-white">
+        {isSignedIn ? <TodoList /> : <LoginForm />}
+      </main>
     </div>
   )
 }
 
+const AppHeader = ({ isSignedIn }: { isSignedIn: boolean }) => {
+  return null
+}
+
+const TodoList = () => {
+  return null
+}
+
+const LoginForm = () => {
+  return null
+}
