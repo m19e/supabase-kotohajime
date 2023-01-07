@@ -13,9 +13,11 @@ const useSession = () => {
     }
     getInitialSession()
 
-    const authListener = supabase.auth.onAuthStateChange(async (_, session) => {
-      setSession(session)
-    })
+    const authListener = supabase.auth.onAuthStateChange(
+      async (_, newSession) => {
+        setSession(newSession)
+      }
+    )
 
     return () => {
       authListener.data.subscription.unsubscribe()
@@ -26,7 +28,7 @@ const useSession = () => {
 }
 
 export const Home = () => {
-  const session = useSession
+  const session = useSession()
   const isSignedIn = !!session
 
   return (
