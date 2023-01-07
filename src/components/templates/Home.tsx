@@ -43,7 +43,24 @@ export const Home = () => {
 }
 
 const AppHeader = ({ isSignedIn }: { isSignedIn: boolean }) => {
-  return null
+  return (
+    <header className="bg-black shadow shadow-green-400 navbar">
+      <div className="navbar-start"></div>
+      <div className="navbar-center">
+        <span className="text-lg text-white">Supabase pg_graphql Example</span>
+      </div>
+      <div className="navbar-end">
+        {isSignedIn && (
+          <button
+            className="text-white btn"
+            onClick={() => supabase.auth.signOut()}
+          >
+            Sign Out
+          </button>
+        )}
+      </div>
+    </header>
+  )
 }
 
 const TodoList = () => {
