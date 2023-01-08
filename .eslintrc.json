@@ -95,6 +95,11 @@
             "position": "before"
           },
           {
+            "pattern": "@/gql",
+            "group": "internal",
+            "position": "before"
+          },
+          {
             "pattern": "@/consts",
             "group": "internal",
             "position": "before"
