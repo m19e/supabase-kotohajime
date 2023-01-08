@@ -1,4 +1,8 @@
-import { AllTasksComponent, OrderByDirection } from "@/gql"
+import {
+  AllTasksComponent,
+  OrderByDirection,
+  UpdateTasksComponent,
+} from "@/gql"
 import type { AllTasksQuery } from "@/gql"
 
 export const AllTasks = () => {
@@ -28,9 +32,40 @@ const TaskList = ({ data }: ListProps) => {
   return (
     <div className="overflow-y-auto grow min-h-0">
       {edges.map(({ node: task }) => (
-        <div key={task.id} className="flex p-1 text-lg">
-          <div className="grow">{task.title}</div>
-          <button>
+        <TaskItem key={task.id} task={task} />
+      ))}
+    </div>
+  )
+}
+
+interface ItemProps {
+  task: {
+    title: string
+    is_completed: boolean
+    id: any
+  }
+}
+
+const TaskItem = ({ task }: ItemProps) => {
+  return (
+    <div key={task.id} className="flex p-1 text-lg">
+      <div className="grow">{task.title}</div>
+      <UpdateTasksComponent>
+        {({ executeMutation }) => (
+          <button
+            onClick={() =>
+              executeMutation({
+                set: {
+                  is_completed: !task.is_completed,
+                },
+                filter: {
+                  id: {
+                    eq: task.id,
+                  },
+                },
+              })
+            }
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -48,8 +83,8 @@ const TaskList = ({ data }: ListProps) => {
               />
             </svg>
           </button>
-        </div>
-      ))}
+        )}
+      </UpdateTasksComponent>
     </div>
   )
 }
