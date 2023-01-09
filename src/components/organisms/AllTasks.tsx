@@ -16,7 +16,10 @@ export const AllTasks = () => {
         ],
       }}
     >
-      {({ data }) => <TaskList data={data} />}
+      {({ data, fetching }) => {
+        if (fetching) return <div>Loading...</div>
+        return <TaskList data={data} />
+      }}
     </AllTasksComponent>
   )
 }
