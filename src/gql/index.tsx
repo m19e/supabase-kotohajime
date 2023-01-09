@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import * as React from 'react';
 import * as Urql from 'urql';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -77,6 +78,11 @@ export type FloatFilter = {
   neq?: InputMaybe<Scalars['Float']>;
 };
 
+/** Boolean expression comparing fields on type "ID" */
+export type IdFilter = {
+  eq?: InputMaybe<Scalars['ID']>;
+};
+
 /** Boolean expression comparing fields on type "Int" */
 export type IntFilter = {
   eq?: InputMaybe<Scalars['Int']>;
@@ -120,6 +126,11 @@ export type MutationUpdatetasksCollectionArgs = {
   set: TasksUpdateInput;
 };
 
+export type Node = {
+  /** Retrieves a record by `ID` */
+  nodeId: Scalars['ID'];
+};
+
 /** Defines a per-field sorting order */
 export enum OrderByDirection {
   /** Ascending order, nulls first */
@@ -143,8 +154,16 @@ export type PageInfo = {
 /** The root type for querying data */
 export type Query = {
   __typename?: 'Query';
+  /** Retrieve a record by its `ID` */
+  node?: Maybe<Node>;
   /** A pagable collection of type `tasks` */
   tasksCollection?: Maybe<TasksConnection>;
+};
+
+
+/** The root type for querying data */
+export type QueryNodeArgs = {
+  nodeId: Scalars['ID'];
 };
 
 
@@ -187,11 +206,13 @@ export type UuidFilter = {
   neq?: InputMaybe<Scalars['UUID']>;
 };
 
-export type Tasks = {
+export type Tasks = Node & {
   __typename?: 'tasks';
   created_at: Scalars['Datetime'];
   id: Scalars['UUID'];
   is_completed: Scalars['Boolean'];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID'];
   title: Scalars['String'];
   user_id: Scalars['UUID'];
 };
@@ -220,6 +241,7 @@ export type TasksFilter = {
   created_at?: InputMaybe<DatetimeFilter>;
   id?: InputMaybe<UuidFilter>;
   is_completed?: InputMaybe<BooleanFilter>;
+  nodeId?: InputMaybe<IdFilter>;
   title?: InputMaybe<StringFilter>;
   user_id?: InputMaybe<UuidFilter>;
 };
@@ -301,6 +323,11 @@ export const AllTasksDocument = gql`
 }
     `;
 
+export const AllTasksComponent = (props: Omit<Urql.QueryProps<AllTasksQuery, AllTasksQueryVariables>, 'query'> & { variables?: AllTasksQueryVariables }) => (
+  <Urql.Query {...props} query={AllTasksDocument} />
+);
+
+
 export function useAllTasksQuery(options?: Omit<Urql.UseQueryArgs<AllTasksQueryVariables>, 'query'>) {
   return Urql.useQuery<AllTasksQuery, AllTasksQueryVariables>({ query: AllTasksDocument, ...options });
 };
@@ -314,6 +341,11 @@ export const InsertTasksDocument = gql`
 }
     `;
 
+export const InsertTasksComponent = (props: Omit<Urql.MutationProps<InsertTasksMutation, InsertTasksMutationVariables>, 'query'> & { variables?: InsertTasksMutationVariables }) => (
+  <Urql.Mutation {...props} query={InsertTasksDocument} />
+);
+
+
 export function useInsertTasksMutation() {
   return Urql.useMutation<InsertTasksMutation, InsertTasksMutationVariables>(InsertTasksDocument);
 };
@@ -326,6 +358,11 @@ export const UpdateTasksDocument = gql`
   }
 }
     `;
+
+export const UpdateTasksComponent = (props: Omit<Urql.MutationProps<UpdateTasksMutation, UpdateTasksMutationVariables>, 'query'> & { variables?: UpdateTasksMutationVariables }) => (
+  <Urql.Mutation {...props} query={UpdateTasksDocument} />
+);
+
 
 export function useUpdateTasksMutation() {
   return Urql.useMutation<UpdateTasksMutation, UpdateTasksMutationVariables>(UpdateTasksDocument);
